@@ -1,0 +1,24 @@
+<div class="accordions-container row">
+  <ng-container *ngTemplateOutlet="addCategoryButton;context:{filteredList:productCategories | filterBy: ['name']: [newProductCategoryName]}"></ng-container>
+  <div class="accordion-container col-12" style="max-height: calc(100vh - 265px);overflow-y: auto;">
+    <nb-accordion>
+      <nb-accordion-item *ngFor="let option of productCategories | filterBy: ['name']: [newProductCategoryName]">
+        <nb-accordion-item-header>{{option.name}}</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <ngx-products-list [products]="option.products"></ngx-products-list>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+    </nb-accordion>
+  </div>
+</div>
+
+
+<ng-template #addCategoryButton let-filteredList="filteredList">
+  <div class="input-group mb-3 col-lg-6 offset-lg-3">
+    <input type="text" [(ngModel)]="newProductCategoryName" (keyup.enter)="(filteredList?.length == 0 && newProductCategoryName?.length > 2) ? addNewCategory() : null" placeholder="Enter Product Category" class="form-control">
+    <div class="input-group-append">
+      <button (click)="addNewCategory()" class="btn btn-outline-secondary" type="button" [disabled]="!(filteredList?.length == 0 && newProductCategoryName?.length > 2)">Add Category</button>
+    </div>
+  </div>
+</ng-template>

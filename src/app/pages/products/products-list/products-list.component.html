@@ -1,0 +1,26 @@
+<div class="accordions-container row">
+  <ng-container *ngTemplateOutlet="addProductButton;context:{filteredList:products | filterBy: ['name']: [newProductName]}"></ng-container>
+  <div class="accordion-container col-12" style="max-height: calc(100vh - 425px);overflow-y: auto;">
+    <nb-accordion>
+      <nb-accordion-item *ngFor="let option of products | filterBy: ['name']: [newProductName]">
+        <nb-accordion-item-header>{{option.name}}</nb-accordion-item-header>
+        <nb-accordion-item-body>
+          A nebula is an interstellar cloud of dust, hydrogen, helium and other ionized gases.
+          Originally, nebula was a name for any diffuse astronomical object,
+          including galaxies beyond the Milky Way.
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+
+    </nb-accordion>
+  </div>
+</div>
+
+
+<ng-template #addProductButton let-filteredList="filteredList">
+  <div class="input-group mb-3 col-lg-6 offset-lg-3">
+    <input type="text" [(ngModel)]="newProductName" (keyup.enter)="(filteredList?.length == 0 && newProductName?.length > 2) ? addProduct() : null" placeholder="Enter Product Name" class="form-control">
+    <div class="input-group-append">
+      <button (click)="addProduct()" class="btn btn-outline-secondary" type="button" [disabled]="!(filteredList?.length == 0 && newProductName?.length > 2)">Add Product</button>
+    </div>
+  </div>
+</ng-template>

@@ -213,6 +213,20 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Products',
+    icon: 'grid-outline',
+    children: [
+      {
+        title: 'Category',
+        link: '/pages/products/product-categories-list',
+      },
+      {
+        title: 'products-list',
+        link: '/pages/products/products-list',
+      },
+    ],
+  },
+  {
     title: 'Miscellaneous',
     icon: 'shuffle-2-outline',
     children: [
